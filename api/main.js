@@ -268,8 +268,7 @@ function encrypted(id) {
 
 /**
  * Generates vrf token from the wasm module.
- * `movieId` should be from TMDB.
- * I'm not sure if the vrf token expiration time. It can be cached.
+ * I'm not sure about the vrf token expiration time. It can be cached.
  * @param {string} movieId
  * @returns {Promise<string>}
  */
