@@ -4,7 +4,19 @@ services:
     env: node
     buildCommand: "npm install && npm run build"
     startCommand: "npm start"
-    routes:
-      - type: rewrite
-        source: "/*"
-        destination: "/api"
+    envVars:
+      - key: PORT
+        value: "3000"
+    dockerCommand: |
+      echo "const express = require('express');
+      const app = express();
+      app.use('/api', (req, res) => {
+        res.send('API endpoint reached');
+      });
+      app.use((req, res) => {
+        res.redirect('/api');
+      });
+      const PORT = process.env.PORT || 3000;
+      app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+      });" > server.js && node server.js
