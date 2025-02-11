@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: Vidsrc_wasm  # Change this to your app name
+    env: node
+    buildCommand: "npm install && npm run build"
+    startCommand: "npm start"
+    routes:
+      - type: rewrite
+        source: "/*"
+        destination: "/api"
