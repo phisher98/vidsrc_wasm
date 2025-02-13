@@ -1,22 +1,12 @@
 services:
   - type: web
-    name: Vidsrc_wasm  # Change this to your app name
+    name: vidsrc-extractor
     env: node
-    buildCommand: "npm install && npm run build"
-    startCommand: "npm start"
+    plan: free
+    repo: https://github.com/phisher98/vidsrc_wasm
+    buildCommand: npm install
+    startCommand: node api/index.js
     envVars:
-      - key: PORT
-        value: "3000"
-    dockerCommand: |
-      echo "const express = require('express');
-      const app = express();
-      app.use('/api', (req, res) => {
-        res.send('API endpoint reached');
-      });
-      app.use((req, res) => {
-        res.redirect('/api');
-      });
-      const PORT = process.env.PORT || 3000;
-      app.listen(PORT, () => {
-        console.log(`Server is running on port ${PORT}`);
-      });" > server.js && node server.js
+      - key: NODE_VERSION
+        value: 18
+    autoDeploy: true
