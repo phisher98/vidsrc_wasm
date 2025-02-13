@@ -1,9 +1,11 @@
 import express from "express";
 import cors from "cors";
-import { main } from "./main.js"; // Ensure main.js has named export
+import { main } from "./main.js";
 
 const app = express();
 app.use(cors());
+
+const PORT = process.env.PORT || 3000;
 
 app.get("/", (_, res) => {
   res.send("Hello Coders! use `/vrf/:id`");
@@ -19,4 +21,4 @@ app.get("/vrf/:id", async (req, res) => {
   });
 });
 
-export default app;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
